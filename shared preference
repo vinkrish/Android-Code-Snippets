@@ -1,0 +1,6 @@
+SharedPreferences sharedPref = context.getSharedPreferences("name", Context.MODE_PRIVATE);
+valueSaved = sharedPref.getInt("key", 0);
+
+SharedPreferences.Editor editor = sharedPref.edit();
+editor.putInt("key", 1);
+editor.apply();
