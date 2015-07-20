@@ -1,0 +1,15 @@
+public static boolean isFromMainThread(){
+    return Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId();
+  }
+
+Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    if (isFromMainThread()) {
+                        Log.d("Fetch", " Runnable Executing From Main Thread");
+                    } else {
+                        Log.d("Fetch", " Runnable Executing From Background Thread");
+                    }
+                }
+            });
+thread.start();
