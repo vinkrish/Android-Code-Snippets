@@ -1,0 +1,15 @@
+In AndroidManifest.xml
+        <receiver android:name="in.vinkrish.adapter.BootSync" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        
+In Code :
+public class BootSync extends BroadcastReceiver {
+	@Override
+	public void onReceive(Context context, Intent intent) {
+		.
+		.
+	}
+}
