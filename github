@@ -1,0 +1,83 @@
+-------GitHub--------
+create a new repository on the command line
+
+echo "# name" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/vinkrish/name.git
+git push -u origin master
+
+or push an existing repository from the command line
+
+git remote add origin https://github.com/vinkrish/name.git
+git push -u origin master
+
+--------GitHub---------
+
+>git init
+will initialize git repository in current directory
+>git status
+to see current state of project
+>git add file.txt
+to start tracking changes made to file.txt...added to staging area
+>git commit -m "just add the file to repository"
+moving file from staging area to repository
+>git add '*.txt'
+adding files of same type
+>git log
+to browse what files are changed
+>git log --stat
+gives statistics of which files changed
+>git remote add origin https://github.com/vinkrish/name.git
+to push local repo to GitHub server...takes remote name and repository URL
+>git push -u origin master
+name of our remote is origin and default local branch name is master. -u tells Git to remember the parameters
+>git pull origin master
+pull down any new changes..how to invite people to our github project?
+>git diff HEAD
+diff of our most recent commit - referred using HEAD pointer
+>git diff commit_id1 commit_id2
+gives difference between two commits (files)
+>git diff --staged
+changes that are staged
+>git reset directory/file.txt
+unstage files..removing
+>git checkout -- file.txt
+changes back to how they were at the last commit for file.txt
+>git checkout commitId
+changes back to respective commit
+
+Branching Out: when you are working on a bug, u can create copy(aka branch) of code and can make separate commits to.
+when u r done u can merge this branch back into their main master branch.
+>git branch clean_up
+branch is called clean_up
+>git branch
+lists local branches: master and new clean_up branch
+>git checkout clean_up
+will start using new branch
+>git rm '*.txt'
+in clean_up branch we can remove file or use wildcard
+>git commit -m "Remove all the files"
+after removing we need to commit changes
+>git checkout master
+after finishing with branch, switch back to master..copy or merge from clean_up branch to master branch
+>git checkout master
+>git merge clean_up
+>git branch -d clean_up
+delete clean_up branch after merging changes to master
+>git push
+to push files from now on
+
+>git clone url
+to fetch files from github
+
+>adding folder to gitignore
+git rm -r -f folder_name
+echo folder_name >> .gitignore
+git commit -m "ignored foler_name dir"
+
+git checkout -b newbranch
+git checkout master
+git merge newbranch
+git branch -d newbranch
