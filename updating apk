@@ -1,0 +1,4 @@
+Intent intent = new Intent();
+intent.setAction(Intent.ACTION_VIEW);
+intent.setDataAndType(Uri.fromFile(new File(filePath)), "application/vnd.android.package-archive");
+activity.startActivity(intent);
