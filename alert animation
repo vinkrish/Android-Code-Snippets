@@ -1,0 +1,125 @@
+public class CommonDialogUtils {
+    public static Dialog displayAlertWhiteDialog(Activity activity, String dialogBody) {
+        final Dialog dialog = new Dialog(activity, R.style.DialogSlideAnim);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.white_ok_popup_dialog);
+        if(dialogBody != null)
+            ((TextView) dialog.findViewById(R.id.alertText)).setText(dialogBody);
+        ((Button) dialog.findViewById(R.id.ok_button)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+        //Grab the window of the dialog, and change the width
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Window window = dialog.getWindow();
+        lp.copyFrom(window.getAttributes());
+        //This makes the dialog take up the full width
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        window.setAttributes(lp);
+        return dialog;
+    }
+}
+
+In styles.xml :
+    <!-- Animation for dialog box -->
+    <style name="DialogSlideAnim" parent="@android:style/Theme.Dialog">
+        <item name="android:windowAnimationStyle">@style/DialogSlideAnimation</item>
+    </style>
+    <style name="DialogSlideAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_bottom_middle</item>
+        <item name="android:windowExitAnimation">@anim/slide_middle_bottom</item>
+    </style>
+    
+In layout :
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/login_page_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/rectangle_gray_pop_up_bottom"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="#848484"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/alertMessageLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/alertText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="alert Text"
+                android:textColor="#848484"
+                android:textSize="@dimen/text_medium" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:layout_marginTop="10dp"
+            android:background="#C0C0C0" />
+
+        <LinearLayout
+            android:id="@+id/alertButtonLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/ok_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/gray_button_background"
+                android:gravity="center"
+                android:text="@string/ok"
+                android:textColor="#848484"
+                android:textSize="@dimen/text_medium" />
+
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
+
+@drawable/rectangle_gray_pop_up_bottom :
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+    <stroke 
+        android:color="#C0C0C0"
+        android:width="0.1dp"/>
+    <solid 
+        android:color="@color/white"/>
+</shape>
+
+@drawable/gray_button_background :
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="#C0C0C0"
+      android:state_pressed="true"  android:color="@color/white" />
+    <item android:drawable="@android:color/transparent"
+      android:state_focused="true"   android:color="#848484" />
+</selector>
+
+
