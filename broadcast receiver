@@ -1,0 +1,13 @@
+BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+  @Override
+  public void onReceive(Context context, Intent intent) {
+    .
+    .
+  }
+};
+
+In activity :
+  registerReceiver(broadcastReceiver, new IntentFilter("BROADCAST_NAME"));
+  
+Somewhere in code :
+context.sendBroadcast(new Intent("BROADCAST_NAME"));
