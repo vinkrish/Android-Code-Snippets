@@ -1,0 +1,3 @@
+DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+int width = displayMetrics.widthPixels;
+int height = displayMetrics.heightPixels;
