@@ -12,3 +12,7 @@ public class RepeatedReceiver extends BroadcastReceiver {
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1000 * 60 * (int)minutes, pendingIntent);
     }
 }
+
+In AndroidManifest.xml :
+<receiver android:name="in.package.adapter.RepeatedReceiver" >
+</receiver>
