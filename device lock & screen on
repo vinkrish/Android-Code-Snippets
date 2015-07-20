@@ -1,0 +1,5 @@
+KeyguardManager km = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
+boolean screenLocked = km.inKeyguardRestrictedInputMode();
+
+PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+boolean isScreenOn = pm.isScreenOn();
