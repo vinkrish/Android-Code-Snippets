@@ -1,0 +1,41 @@
+new Thread(new Runnable() {
+  @Override
+  public void run() {
+  .
+  .
+  }
+}).start();
+
+starting thread at different runtime :
+Thread thread = new Thread() {
+    @Override
+    public void run() {
+    .
+    .
+    }
+};
+thread.start();
+
+thread which also runs on ui thread :
+new Thread(new Runnable() {
+  @Override
+  public void run() {
+  // do some work here
+    runOnUiThread(new Runnable() {
+      @Override
+      public void run() {
+          new MyAsyncTask(ctx).execute(); 
+        }
+    });
+  }
+}).start();
+
+Handler :
+Handler handler = new Handler();
+final Runnable r = new Runnable() {
+    public void run() {
+        // do some work here
+        handler.postDelayed(this, 1000);
+    }
+};
+handler.postDelayed(r, 1000);
