@@ -1,0 +1,13 @@
+public int getCount(){
+		int count = 0;
+		sqliteDatabase = dbHelper.getReadableDatabase();
+		Cursor c = sqliteDatabase.rawQuery("select (select count(*) from table_1) + (select count(*) from table_2) + (select count(*) from table_3) " +
+				"as count", null);
+		c.moveToFirst();
+		while(!c.isAfterLast()){
+			count = c.getInt(c.getColumnIndex("count"));
+			c.moveToNext();
+		}
+		c.close();
+		return count;
+	}
