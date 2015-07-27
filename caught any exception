@@ -1,0 +1,153 @@
+In Activity:
+Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
+
+ExceptionHandler Class:
+import java.lang.Thread.UncaughtExceptionHandler;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import android.provider.Settings.Secure;
+import android.util.Log;
+
+public class ExceptionHandler implements UncaughtExceptionHandler {
+	private final Activity myContext;
+	private final String LINE_SEPARATOR = "\n";
+
+	public ExceptionHandler(Activity act) {
+		myContext = act;
+	}
+
+	@Override
+	public void uncaughtException(Thread thread, Throwable ex) {
+		StringWriter stackTrace = new StringWriter();
+		ex.printStackTrace(new PrintWriter(stackTrace));
+		StringBuilder errorReport = new StringBuilder();
+		errorReport.append(stackTrace.toString());
+		errorReport.append(LINE_SEPARATOR);
+		String android_id = Secure.getString(myContext.getBaseContext().getContentResolver(),Secure.ANDROID_ID);
+		errorReport.append(android_id);
+		
+		Log.d("error", errorReport+"");
+
+		Intent intent = new Intent(myContext, Restart.class);
+		intent.putExtra("error", errorReport.toString());
+		myContext.startActivity(intent);
+
+		android.os.Process.killProcess(android.os.Process.myPid());
+		System.exit(10);
+	}
+}
+
+Restart Activity :
+import in.vinkrish.UploadError;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+
+public class Restart extends BaseActivity {
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_restart);
+		
+		Intent i = getIntent();
+		String s = i.getStringExtra("error");
+		Log.d("error message", s);
+
+		new UploadError(this, s).upError();
+		Intent intent = new Intent(this.getApplicationContext(), in.vinkrish.Default.class);
+		startActivity(intent);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.restart, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		return super.onOptionsItemSelected(item);
+	}
+	
+	@Override
+	public void onBackPressed(){}
+}
+
+UploadError :
+import java.net.ConnectException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.Activity;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
+import android.util.Log;
+
+public class UploadError implements StringConstant{
+	private SqlDbHelper sqlHandler;
+	private SQLiteDatabase sqliteDatabase;
+	private Context appContext;
+	private String errorReport;
+	private int uploadSuccess;
+
+	public UploadError(Activity context, String error){
+		errorReport = error;
+		appContext = context.getApplicationContext();
+		sqlHandler = SqlDbHelper.getInstance(appContext);
+		sqliteDatabase = sqlHandler.getWritableDatabase();
+	}
+
+	class CalledUploadError extends AsyncTask<String, String, String>{
+		private JSONObject jsonReceived;
+
+		@Override
+		protected String doInBackground(String... arg0) {
+			JSONObject json = new JSONObject();
+
+			try{
+				json.put("log", errorReport);
+				json.put("date", getToday());
+				jsonReceived = UploadSyncParser.makePostRequest(logged, json);
+			}catch (JSONException e1) {
+				e1.printStackTrace();
+			}catch (ConnectException e) {
+				e.printStackTrace();
+			}
+			try{
+				uploadSuccess = jsonReceived.getInt(TAG_SUCCESS);
+				Log.d("error_success", uploadSuccess+"");
+			}catch(JSONException e){
+				e.printStackTrace();
+			}
+			return null;
+		}
+		protected void onPostExecute(String s){
+			super.onPostExecute(s);
+		}
+	}
+
+	private String getToday() {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+		Date today = new Date();
+		return dateFormat.format(today);
+	}
+
+	public void upError(){
+		new CalledUploadError().execute();
+	}
+
+}
