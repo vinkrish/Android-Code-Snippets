@@ -1,0 +1,2 @@
+getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
