@@ -1,0 +1,21 @@
+Uri imageUri = Uri.parse("android.resource://" + getPackageName() + "/drawable/" + "ic_launcher");
+ Intent shareIntent = new Intent();
+ shareIntent.setAction(Intent.ACTION_SEND);
+ shareIntent.putExtra(Intent.EXTRA_TEXT, "Hello");
+ shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
+ shareIntent.setType("image/jpeg");
+ shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+ startActivity(Intent.createChooser(shareIntent, "send"));
+ 
+ (or)
+ 
+ private void share(String type, String _text){
+     File filePath = getFileStreamPath("shareimage.jpg");
+     Intent shareIntent = new Intent();
+     shareIntent.setAction(Intent.ACTION_SEND);
+     shareIntent.putExtra(Intent.EXTRA_TEXT, _text);
+     shareIntent.putExtra(Intent.EXTRA_STREAM,Uri.fromFile(new File(filePath)));
+     shareIntent.setType("image/jpeg");
+     shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+     startActivity(Intent.createChooser(shareIntent, "send"));
+}
