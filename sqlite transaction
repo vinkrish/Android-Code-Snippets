@@ -1,0 +1,13 @@
+sqliteDatabase = dbHelper.getWritableDatabase();
+		String sql = "INSERT INTO table (columnId_1,columnId_2,columnId_3) VALUES(?,?,?)";
+		sqliteDatabase.beginTransaction();
+		SQLiteStatement stmt = sqliteDatabase.compileStatement(sql);
+		for(tableDao t: tList){
+			stmt.bindLong(1, h.getColumnId_1());
+			stmt.bindString(2, h.getColumnId_2());
+			stmt.bindString(3, h.getColumnId_3());
+			stmt.execute();
+			stmt.clearBindings();
+		}
+		sqliteDatabase.setTransactionSuccessful();
+		sqliteDatabase.endTransaction();
