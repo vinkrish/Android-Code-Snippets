@@ -1,0 +1,53 @@
+public List<String> selectColumnType(String tableName, List<String> columnNames){
+		sqliteDatabase = dbHelper.getReadableDatabase();
+		Cursor c = sqliteDatabase.rawQuery("PRAGMA table_info("+tableName+")", null);
+		List<ColumnType> columnType = new ArrayList<ColumnType>();
+		c.moveToFirst();
+		while(!c.isAfterLast()){
+			ColumnType ct = new ColumnType();
+			ct.setType(c.getString(c.getColumnIndex("type")));
+			ct.setName(c.getString(c.getColumnIndex("name")));
+			columnType.add(ct);
+			c.moveToNext();
+		}
+		c.close();
+
+		List<String> type = new ArrayList<String>();
+		for(String cn: columnNames){
+			for(ColumnType ct: columnType){
+				if(cn.trim().equals(ct.getName())){
+					if(ct.getType().equals("INT")){
+						type.add("Long");
+					}else if(ct.getType().equals("TEXT")){
+						type.add("String");
+					}else if(ct.getType().equals("REAL")){
+						type.add("Double");
+					}else if(ct.getType().equals("DATETIME")){
+						type.add("String");
+					}else if(ct.getType().equals("INTEGER")){
+						type.add("Long");
+					}
+				}
+			}
+		}
+		return type;
+	}
+	
+	public class ColumnType {
+	private String name;
+	private String type;
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+
+}
