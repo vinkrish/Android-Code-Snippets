@@ -1,0 +1,10 @@
+import android.support.v4.widget.DrawerLayout;
+
+private DrawerLayout mDrawerLayout;
+
+public void open() {
+        if(mDrawerLayout.isDrawerOpen(GravityCompat.START))
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
+        else
+            mDrawerLayout.openDrawer(Gravity.LEFT);
+    }
