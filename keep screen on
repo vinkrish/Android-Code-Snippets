@@ -1,2 +1,8 @@
 getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
 getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+To remove screen on and back to default display timeout :
+getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+In xml :
+android:keepScreenOn = "true"
