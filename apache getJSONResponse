@@ -24,12 +24,10 @@ public class GetJSONResponse {
     private static InputStream is = null;
     private static JSONObject jObj = null;
     private static String json = "";
-    private static boolean flag;
 
     @SuppressWarnings("deprecation")
     public static JSONObject makePostRequest(String urlUlAnswered, JSONObject json) throws ConnectException {
         try {
-            flag = false;
             HttpPost httpPostRequest = new HttpPost(urlUlAnswered);
             HttpParams param = new BasicHttpParams();
             HttpConnectionParams.setConnectionTimeout(param, 60000);
@@ -51,26 +49,13 @@ public class GetJSONResponse {
             }
             is.close();
             json = sb.toString();
-            Log.d("Received data", json + "");
             jObj = new JSONObject(json);
         } catch (ClientProtocolException e) {
             e.printStackTrace();
-            flag = true;
         } catch (IOException e) {
             e.printStackTrace();
-            flag = true;
         } catch (JSONException e) {
             e.printStackTrace();
-            flag = true;
-        } finally {
-            if (flag) {
-                try {
-                    jObj = new JSONObject();
-                    jObj.put("success", 0);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
         }
         return jObj;
     }
