@@ -44,11 +44,19 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
     private String convertInputStreamToString(InputStream inputStream) throws IOException {
         BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
         String line = "";
-        String result = "";
+        StringBuilder sb = new StringBuilder();
         while((line = bufferedReader.readLine()) != null){
-            result += line;
+            sb.append(line + "\n");
         }
-        if(null!=inputStream){
+        if (bufferedReader != null) {
+	        try {
+		        bufferedReader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+        if(inputStream != null){
             inputStream.close();
         }
         return result;
