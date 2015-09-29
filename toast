@@ -1,0 +1,11 @@
+private Toast myToast;
+
+private void showToast(String msg){
+        //Stop any previous toasts
+        if(myToast !=null){
+            myToast.cancel();
+        }
+        //Make and display new toast
+        myToast = Toast.makeText(this,msg,Toast.LENGTH_SHORT);
+        myToast.show();
+    }
