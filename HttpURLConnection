@@ -12,9 +12,15 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
                 urlConnection.setRequestProperty("Content-Type", "application/json");
                 urlConnection.setRequestProperty("Accept", "application/json");
 
-                urlConnection.setRequestMethod("GET");
+                urlConnection.setRequestMethod("POST");
+               	// OutputStream os = httpCon.getOutputStream();
+		// OutputStreamWriter osw = new OutputStreamWriter(os, "UTF-8");
+                OutputStreamWriter osw= new OutputStreamWriter(urlConnection.getOutputStream());
+                osw.write(params[1]);
+                osw.flush();
+                osw.close();
+                
                 int statusCode = urlConnection.getResponseCode();
-
                 /* 200 represents HTTP OK */
                 if (statusCode ==  200) {
                     inputStream = new BufferedInputStream(urlConnection.getInputStream());
