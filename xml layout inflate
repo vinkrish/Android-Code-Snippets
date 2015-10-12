@@ -1,0 +1,4 @@
+LayoutInflater inflater =
+                (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflater.inflate(R.layout.your_layout, null);
+    viewGroup.addView(v);
