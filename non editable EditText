@@ -1,0 +1,19 @@
+.
+.
+android:clickable="false" 
+android:cursorVisible="false" 
+android:focusable="false" 
+android:focusableInTouchMode="false"
+
+(or) 
+
+android:editable="false"
+.
+.
+programmatically:
+
+EditText editText;
+editText.setKeyListener(null);
+
+//to disable cursor
+editText.setEnabled(false);
