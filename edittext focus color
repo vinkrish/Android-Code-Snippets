@@ -1,0 +1,1 @@
+editText.getBackground().setColorFilter(getResources().getColor(R.color.light_black), PorterDuff.Mode.SRC_ATOP);
