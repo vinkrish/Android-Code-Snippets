@@ -1,0 +1,25 @@
+@Override
+public void onSaveInstanceState(Bundle savedInstanceState) {
+  super.onSaveInstanceState(savedInstanceState);
+  .
+  .
+  savedInstanceState.putBoolean("MyBoolean", true);
+  savedInstanceState.putDouble("myDouble", 1.9);
+  savedInstanceState.putInt("MyInt", 1);
+  savedInstanceState.putString("MyString", "Welcome back to Android");
+  .
+  .
+}
+
+@Override
+public void onRestoreInstanceState(Bundle savedInstanceState) {
+  super.onRestoreInstanceState(savedInstanceState);
+  .
+  .
+  boolean myBoolean = savedInstanceState.getBoolean("MyBoolean");
+  double myDouble = savedInstanceState.getDouble("myDouble");
+  int myInt = savedInstanceState.getInt("MyInt");
+  String myString = savedInstanceState.getString("MyString");
+  .
+  .
+}
