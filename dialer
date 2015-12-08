@@ -1,0 +1,3 @@
+Intent intent = new Intent(Intent.ACTION_DIAL);
+intent.setData(Uri.parse("tel:9164065688"));
+startActivity(intent);
