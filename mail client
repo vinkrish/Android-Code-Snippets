@@ -1,0 +1,14 @@
+Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+emailIntent.setType("plain/text");
+emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"vinkrish@gmail.com"});
+emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Service");
+startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+                
+                (or)
+
+Uri uri = Uri.parse("mailto:" + "vinkrish@gmail.com")
+            .buildUpon()
+            .appendQueryParameter("subject", "service")
+            .build();
+Intent emailIntent = new Intent(Intent.ACTION_SENDTO, uri);
+startActivity(Intent.createChooser(emailIntent, "Send mail..."));
