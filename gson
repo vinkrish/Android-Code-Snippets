@@ -1,3 +1,36 @@
+public class Employees {
+    @SerializedName("employees")
+    private List<Employee> employeeList;
+
+    public List<Employee> getEmployeeList() {
+        return employeeList;
+    }
+
+    public void setEmployeeList(List<Employee> employeeList) {
+        this.employeeList = employeeList;
+    }
+}
+
+public class Employee {
+    private String firstName;
+    private String lastName;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+}
 
 String response1 = "{\"employees\":[\n" +
                 "{\"firstName\":\"John\", \"lastName\":\"Doe\"},\n" +
