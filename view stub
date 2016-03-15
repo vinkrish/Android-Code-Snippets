@@ -1,0 +1,16 @@
+<ViewGoup>
+.
+.
+<ViewStub
+android:id="@+id/layout_stub"
+android:inflatedId="@+id/message_layout"
+android:layout="@layout/child_stub"
+android:layout_width="match_parent"
+android:layout_height="match_parent"/>
+.
+.
+</ViewGroup>
+
+//In Code
+ViewStub stub = (ViewStub) findViewById(R.id.layout_stub);
+stub.inflate();
