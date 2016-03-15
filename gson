@@ -1,0 +1,37 @@
+
+String response1 = "{\"employees\":[\n" +
+                "{\"firstName\":\"John\", \"lastName\":\"Doe\"},\n" +
+                "{\"firstName\":\"Anna\", \"lastName\":\"Smith\"},\n" +
+                "{\"firstName\":\"Peter\", \"lastName\":\"Jones\"}\n" +
+                "]}";
+
+String response2 = "[\n" +
+                "{\"firstName\":\"John\", \"lastName\":\"Doe\"},\n" +
+                "{\"firstName\":\"Anna\", \"lastName\":\"Smith\"},\n" +
+                "{\"firstName\":\"Peter\", \"lastName\":\"Jones\"}\n" +
+                "]";
+
+Gson gson = new Gson();
+
+try{
+  JSONObject json =  new JSONObject(response);
+
+//--------with response1--------//
+  Employees employeees = gson.fromJson(response1, Employees.class);
+  List<Employee> employeeList = employeees.getEmployeeList();
+  for(Employee employee: employeeList){
+      Log.d(employee.getFirstName()+"----------", employee.getLastName()+"");
+  }
+  //--------end---------//
+  
+  //--------with response2--------//
+  Employee[] employees = gson.fromJson(response2, Employee[].class);
+  for (Employee employee: employees) {
+      Log.d(employee.getFirstName()+"----------", employee.getLastName()+"");
+  }
+  Log.d("emplooyeeList - size",employees.length+"");
+  //--------end--------//
+
+} catch (JSONException e) {
+  e.printStackTrace();
+}
