@@ -1,0 +1,23 @@
+Timer timer;
+MyTimerTask myTimerTask;
+.
+.
+.
+timer = new Timer();
+myTimerTask = new MyTimerTask();
+timer.schedule(myTimerTask, 1000, 500); //1s after, every 500ms
+.
+.
+.
+class MyTimerTask extends TimerTask {
+  @Override
+  public void run() {
+      runOnUiThread(new Runnable() {
+          @Override
+          public void run() {
+              //change UI as needed
+          }
+      });
+  }
+}
+    
