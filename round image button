@@ -1,6 +1,12 @@
 ImageButton image = (ImageButton) findViewById(R.id.image);
-Bitmap bitImg = BitmapFactory.decodeResource(getResources(),
-    R.drawable.bitImg);
+
+Bitmap bitImg = BitmapFactory.decodeResource(getResources(), R.drawable.bitImg);
+    (or)
+BitmapFactory.Options options = new BitmapFactory.Options();
+options.inSampleSize = 8;
+String imagePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + "image.jpg";
+Bitmap bitmap = BitmapFactory.decodeFile(imagePath, options);
+    
 image.setImageBitmap(getRoundedCornerImage(bitImg));
 .
 .
