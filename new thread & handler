@@ -39,3 +39,11 @@ final Runnable r = new Runnable() {
     }
 };
 handler.postDelayed(r, 1000);
+
+private class MyTask implements Runnable {
+public void run() {
+        int i = 0; // Stored on the thread local stack.
+    }
+}
+Thread myThread = new Thread(new MyTask());
+myThread.start();
