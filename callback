@@ -1,0 +1,38 @@
+public interface CallBack {
+    void callBack();
+}
+
+public class SomeClass extends AppCompatActivity implements CallBack {
+  
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
+      setContentView(R.layout.someLayout);
+      
+      SomeOtherClass.randomFunction(this);
+  }
+  
+  @Override
+  public void callBack() {
+    doSomething();
+  }
+    
+  private void doSomething() {
+    // Nice work
+  }
+
+}
+
+public class SomeOtherClass {
+    private static CallBack parentClass;
+
+    public static void randomFunction(CallBack mainClass) {
+        //parentClass = mainClass;
+        //parentClass.callBAck();
+        (or)
+        mainClass.callBack();
+        
+    }
+
+}
+
