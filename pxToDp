@@ -3,3 +3,8 @@ public static int pxToDp(int px, Context context) {
   int dp = Math.round(px / (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
   return dp;
 }
+
+public static int px2dp(){
+    float scale = getResources().getDisplayMetrics().density;
+    return (int) ((DESIRED_PIXEL_VALUE) - 0.5f / scale);
+}
