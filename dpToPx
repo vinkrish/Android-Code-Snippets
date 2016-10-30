@@ -6,5 +6,5 @@ public static int dpToPx(int dp, Context context) {
 
 public static int dp2px(){
   float scale = getResources().getDisplayMetrics().density;
-  int pixelValue = (int) (DESIRED_DP_VALUE * scale + 0.5f);
+  return (int) (DESIRED_DP_VALUE * scale + 0.5f);
 }
