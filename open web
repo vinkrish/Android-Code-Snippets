@@ -1,0 +1,13 @@
+string.xml
+<string name="text_view"><a href="https://www.google.co.in">Google here</a></string>
+
+textView.setMovementMethod(LinkMovementMethod.getInstance());
+(or)
+textView.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        Uri uriUrl = Uri.parse("https://www.pmi.org/certifications/types/project-management-pmp");
+        Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+        startActivity(launchBrowser);
+    }
+});
