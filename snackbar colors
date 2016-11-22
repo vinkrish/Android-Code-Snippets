@@ -1,0 +1,12 @@
+@BindView(R.id.coordinatorLayout) CoordinatorLayout coordinatorLayout;
+    
+private Snackbar snackbar;
+
+private showSnackbar(String message){
+    snackbar = Snackbar.make(coordinatorLayout, message, Snackbar.LENGTH_LONG);
+    View snackBarView = snackbar.getView();
+    snackBarView.setBackgroundColor(ContextCompat.getColor(this, R.color.COLOR_OF_YOUR_CHOICE));
+    TextView textView = (TextView) snackBarView.findViewById(android.support.design.R.id.snackbar_text);
+    textView.setTextColor(Color.COLOR_OF_YOUR_CHOICE);
+    snackbar.show();
+}
