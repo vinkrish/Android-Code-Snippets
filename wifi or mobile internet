@@ -1,20 +1,39 @@
 protected static boolean isNetworkConnected(Context context) {
-        boolean isConnectedWifi = false;
-        boolean isConnectedMobile = false;
+	boolean isConnectedWifi = false;
+	boolean isConnectedMobile = false;
 
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
-        for (NetworkInfo ni : netInfo) {
-            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
-                if (ni.isConnected())
-                    isConnectedWifi = true;
-            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
-                if (ni.isConnected())
-                    isConnectedMobile = true;
-        }
-        return isConnectedWifi || isConnectedMobile;
+	ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+	NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+	for (NetworkInfo ni : netInfo) {
+	    if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+		if (ni.isConnected())
+		    isConnectedWifi = true;
+	    if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
+		if (ni.isConnected())
+		    isConnectedMobile = true;
+	}
+	return isConnectedWifi || isConnectedMobile;
     }
+
+// cm.getAllNetworkInfo() is deprecated use below function.
     
+public static boolean isNetworkAvailable(Context context) {
+        int[] networkTypes = {ConnectivityManager.TYPE_MOBILE,
+                ConnectivityManager.TYPE_WIFI};
+        try {
+            ConnectivityManager connectivityManager =
+                    (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            for (int networkType : networkTypes) {
+                NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+                if (activeNetworkInfo != null &&
+                        activeNetworkInfo.getType() == networkType)
+                    return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return false;
+    }
     
   protected static boolean isWifiConnected(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -26,11 +45,11 @@ protected static boolean isNetworkConnected(Context context) {
     }
 
 protected boolean isOnline() {
-		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo netInfo = cm.getActiveNetworkInfo();
-		if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-			return true;
-		} else {
-			return false;
-		}
+	ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+	NetworkInfo netInfo = cm.getActiveNetworkInfo();
+	if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+		return true;
+	} else {
+		return false;
 	}
+}
