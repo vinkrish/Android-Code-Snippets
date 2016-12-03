@@ -1,3 +1,8 @@
 DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
 int width = displayMetrics.widthPixels;
 int height = displayMetrics.heightPixels;
+
+New way:
+DisplayMetrics metrics = new DisplayMetrics();
+getWindowManager().getDefaultDisplay().getMetrics(metrics);
+Log.d("ApplicationTagName", "Display width in px is " + metrics.widthPixels);
