@@ -1,0 +1,20 @@
+AlertDialog.Builder builder = new AlertDialog.Builder(this);
+View view = this.getLayoutInflater().inflate(R.layout.dialog_search, null);
+builder.setView(view);
+
+builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+	@Override
+	public void onClick(DialogInterface dialog, int which) {
+		
+	}
+});
+builder.setNegativeButton("Cancel", null);
+//builder.show();
+
+/*Custom Position*/
+AlertDialog dialog = builder.create();
+dialog.getWindow().setGravity(Gravity.TOP);
+WindowManager.LayoutParams layoutParams = dialog.getWindow().getAttributes();
+layoutParams.y = 100; // top margin
+dialog.getWindow().setAttributes(layoutParams);
+dialog.show();
