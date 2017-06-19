@@ -31,6 +31,13 @@ new Thread(new Runnable() {
 }).start();
 
 Handler :
+new Handler(Looper.getMainLooper()).post(new Runnable() {
+    @Override
+    public void run() {
+        Log.d("UI thread", "I am the UI thread if you run me on UI thread");
+    }
+});
+
 Handler handler = new Handler();
 final Runnable r = new Runnable() {
     public void run() {
