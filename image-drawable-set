@@ -1,0 +1,18 @@
+private boolean hasImage(@NonNull ImageView view) {
+    Drawable drawable = view.getDrawable();
+    boolean hasImage = (drawable != null);
+
+    if (hasImage && (drawable instanceof BitmapDrawable)) {
+        hasImage = ((BitmapDrawable)drawable).getBitmap() != null;
+    }
+
+    return hasImage;
+}
+
+public boolean hasNullOrEmptyDrawable(ImageView iv)
+{
+    Drawable drawable = iv.getDrawable();
+    BitmapDrawable bitmapDrawable = drawable instanceof BitmapDrawable ? (BitmapDrawable)drawable : null;
+
+    return bitmapDrawable == null || bitmapDrawable.getBitmap() == null;
+}
