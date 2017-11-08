@@ -1,0 +1,12 @@
+ActivityManager m = (ActivityManager) ctx
+				.getSystemService(ctx.ACTIVITY_SERVICE);
+List<RunningTaskInfo> runningTaskInfoList = m.getRunningTasks(10);
+Iterator<RunningTaskInfo> itr = runningTaskInfoList.iterator();
+while (itr.hasNext()) {
+	RunningTaskInfo runningTaskInfo = (RunningTaskInfo) itr.next();
+	int id = runningTaskInfo.id;
+	CharSequence desc = runningTaskInfo.description;
+	int numOfActivities = runningTaskInfo.numActivities;
+	String topActivity = runningTaskInfo.topActivity
+				.getShortClassName();
+}
