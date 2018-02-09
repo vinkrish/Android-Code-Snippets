@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<objectAnimator
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:propertyName="translationX"
+    android:duration="500"
+    android:valueFrom="0"
+    android:valueTo="200"
+    android:valueType="floatType"/>
+
+
+
+    <!--
+        translationX   - move in X axis
+        translationY   - move in Y axis
+        x 			   - translation with respect to it’s container
+        y			   - translation with respect to it’s container
+    -->

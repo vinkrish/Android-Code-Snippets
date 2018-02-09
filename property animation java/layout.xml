@@ -1,0 +1,66 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#ff17ff1b"
+                android:id="@+id/rlayout"
+                tools:context=".MainActivity">
+
+   <ImageView
+       android:layout_width="100dp"
+       android:layout_height="100dp"
+       android:id="@+id/imageview"
+       android:src="@drawable/tiling"
+       android:layout_alignParentTop="true"
+       android:layout_centerHorizontal="true"
+       android:layout_marginTop="100dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="100"
+        >
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Flip"
+            android:onClick="rotateAnimation"
+            android:layout_weight="25"
+            />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="scaleAnimation"
+            android:layout_weight="25"
+            android:text="Scale"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="translateAnimation"
+            android:layout_weight="25"
+            android:text="Trans"
+            />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="alphaAnimation"
+            android:text="Alpha"
+            android:layout_weight="25"
+            />
+
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="setAnimation"
+        android:text="set"
+        android:id="@+id/button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/imageview"
+        android:layout_alignStart="@+id/imageview"/>
+
+</RelativeLayout>
