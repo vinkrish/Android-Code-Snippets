@@ -1,0 +1,54 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="#ff37ff23"
+	tools:context=".MainActivity">
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/volleyball"
+        android:src="@drawable/volleyball"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="100"
+        >
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Rotate"
+            android:onClick="rotateAnimation"
+            android:layout_weight="25"
+            android:id="@+id/button2"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="scaleAnimation"
+            android:layout_weight="25"
+            android:text="Scale"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="translateAnimation"
+            android:layout_weight="25"
+            android:text="Trans"
+            />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="alphaAnimation"
+            android:text="Alpha"
+            android:layout_weight="25"
+            android:id="@+id/button"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>
