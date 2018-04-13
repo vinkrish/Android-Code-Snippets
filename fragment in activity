@@ -1,0 +1,23 @@
+// In Activity layout
+<FrameLayout
+    android:id="@+id/content_frame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+// In Activity
+ReplaceFragment.replace(new Dashbord(), getFragmentManager());
+
+//Util
+import in.teacher.activity.R;
+import in.teacher.activity.R.animator;
+import android.app.Fragment;
+import android.app.FragmentManager;
+
+public class ReplaceFragment {
+    public static void replace(Fragment f, FragmentManager fm) {
+        fm
+                .beginTransaction()
+                .setCustomAnimations(animator.fade_in, animator.fade_out)
+                .replace(R.id.content_frame, f).commit();
+    }
+}
