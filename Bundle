@@ -1,0 +1,19 @@
+ int counter  = 0;
+ @Override
+ public void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    outState.putInt("value",counter);
+ }
+ 
+ @Override
+public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+
+    if(savedInstanceState == null){
+        //it is the first time the activity/fragment is being called
+        counter = 0;
+    }else{
+        //not the first time so we will check SavedInstanceState bundle
+        counter = savedInstanceState.getInt("value",0); //here zero is the default value
+    }
+}
