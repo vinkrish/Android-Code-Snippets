@@ -1,0 +1,52 @@
+.......InjectorsModule.java.......
+@Module
+abstract class InjectorsModule {
+	@ContributesAndroidInjector(modules = {MainModule.class})
+	abstract MainActivity mainActivity();
+
+//	Add more ContributesAndroidInjector here...
+}
+
+.......AppComponent.java.......
+@Singleton
+@Component(modules = {
+		AndroidSupportInjectionModule.class,
+		InjectorsModule.class
+})
+
+public interface AppComponent extends AndroidInjector<App> {
+	@Component.Builder
+	abstract class Builder extends AndroidInjector.Builder<App> {
+	}
+}
+
+.......App.java.......
+public class App extends DaggerApplication {
+	@Override
+	protected AndroidInjector<App> applicationInjector() {
+		return DaggerAppComponent.builder().create(this);
+	}
+}
+
+........MainModule.java........
+@Module
+public abstract class MainModule {
+
+	@Binds
+	abstract MainView mainView(MainActivity act);
+
+	@Provides
+	static String providesUnusedData() {
+		return "Unused Data";
+	}
+	// Add more @Provides here
+}
+
+.......MainActivity.java.......
+public class MainActivity extends AppCompatActivity implements MainView {
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		AndroidInjection.inject(this);
+		super.onCreate(savedInstanceState);
+	}
+}
