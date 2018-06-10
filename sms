@@ -1,0 +1,4 @@
+Uri sms_uri = Uri.parse("smsto:+9xxxxxxxxx"); 
+Intent sms_intent = new Intent(Intent.ACTION_SENDTO, sms_uri); 
+sms_intent.putExtra("sms_body", "Hello World!"); 
+startActivity(sms_intent); 
